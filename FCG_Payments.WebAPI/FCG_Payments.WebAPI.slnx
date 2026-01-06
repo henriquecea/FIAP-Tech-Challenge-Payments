@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="../FCG_Payments.Application/FCG_Payments.Application.csproj" />
+  <Project Path="../FCG_Payments.Domain/FCG_Payments.Domain.csproj" />
+  <Project Path="../FCG_Payments.Infrastructure/FCG_Payments.Infrastructure.csproj" />
+  <Project Path="../FCG_Payments.Test/FCG_Payments.Test.csproj" />
+  <Project Path="FCG_Payments.WebAPI.csproj" />
+</Solution>
