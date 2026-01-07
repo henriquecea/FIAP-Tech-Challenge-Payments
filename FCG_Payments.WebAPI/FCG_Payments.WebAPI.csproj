@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <PackageReference Include="Elastic.Clients.Elasticsearch" Version="8.19.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.22">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FCG_Payments.Application\FCG_Payments.Application.csproj" />
+    <ProjectReference Include="..\FCG_Payments.Domain\FCG_Payments.Domain.csproj" />
+    <ProjectReference Include="..\FCG_Payments.Infrastructure\FCG_Payments.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
