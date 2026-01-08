@@ -34,7 +34,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseSwagger();
-app.UseSwagger();
+app.UseSwaggerUI();
 
 // Redirecionamento da raiz para /swagger
 app.MapGet("/", context =>
