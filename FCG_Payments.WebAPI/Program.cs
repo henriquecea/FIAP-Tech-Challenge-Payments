@@ -1,12 +1,23 @@
+using Azure.Messaging.ServiceBus;
 using FCG_Payments.Application.Service;
 using FCG_Payments.Domain.Interface.Repository;
 using FCG_Payments.Domain.Interface.Service;
 using FCG_Payments.Infrastructure.Data;
 using FCG_Payments.Infrastructure.Repository;
+using FCG_Payments.Infrastructure.ServiceBus;
 using FCG_Payments.WebAPI.Extension;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApplicationInsightsTelemetry(options =>
+{
+    options.EnableAdaptiveSampling = false;
+});
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddApplicationInsights();
 
 // Serviços customizados
 builder.AddSwagger();
@@ -23,6 +34,12 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+var cs = builder.Configuration["AzureServiceBus:ConnectionString"]
+         ?? "Endpoint=sb://fake.servicebus.windows.net/;SharedAccessKeyName=fakeKeyName;SharedAccessKey=fakeKey";
+
+builder.Services.AddSingleton(new ServiceBusClient(cs));
+builder.Services.AddHostedService<PaymentConsumerHostedService>();
 
 var app = builder.Build();
 

@@ -8,11 +8,12 @@ namespace FCG_Payments.WebAPI.Controllers;
 [Route("api/[controller]")]
 public class PaymentController(IPaymentService paymentService) : ControllerBase
 {
-    [HttpGet()]
-    public async Task<PaymentDto> GetStatus() =>
-        await paymentService.GetStatus();
-
-    [HttpPost()]
-    public async Task<ProcessPaymentDto> ProcessPayment() =>
-        await paymentService.ProcessPayment();
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetByIdAsync(Guid id)
+    {
+        var game = await paymentService.GetByIdAsync(id);
+        if (game is null) return NotFound();
+        return Ok(game);
+    }
 }
+

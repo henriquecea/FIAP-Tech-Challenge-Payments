@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace FCG_Payments.Domain.Model;
+namespace FCG_Payments.Domain.Model.Payment;
 
 public record PaymentDto(
     [property: JsonProperty("status")]
