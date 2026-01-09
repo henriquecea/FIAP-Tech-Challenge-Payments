@@ -35,8 +35,8 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-var cs = builder.Configuration["AzureServiceBus:ConnectionString"]
-         ?? "Endpoint=sb://fake.servicebus.windows.net/;SharedAccessKeyName=fakeKeyName;SharedAccessKey=fakeKey";
+var cs = builder.Configuration["AzureServiceBus::ConnectionString"]
+         ?? Environment.GetEnvironmentVariable("AzureServiceBus::ConnectionString");
 
 builder.Services.AddSingleton(new ServiceBusClient(cs));
 builder.Services.AddHostedService<PaymentConsumerHostedService>();
